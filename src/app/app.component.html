@@ -19,17 +19,62 @@
           <label for="projectName">Project Name</label>
           <input
             type="text"
-            name="projectName"
             id="projectName"
             formControlName="projectName"
             class="form-control"
           />
         </div>
-        <button
-          class="btn btn-primary"
-          type="submit"
-          [disabled]="!projectForm.valid"
+        <span
+          class="help-block"
+          *ngIf="
+            !projectForm.get('projectName').valid &&
+            projectForm.get('projectName').touched &&
+            !projectForm.get('projectName').errors['projectNameForbidden']
+          "
         >
+          Please enter a valid project name!
+        </span>
+        <span
+          class="help-block"
+          *ngIf="
+            !projectForm.get('projectName').valid &&
+            projectForm.get('projectName').touched &&
+            projectForm.get('projectName').errors['projectNameForbidden']
+          "
+        >
+          This project name is forbidden!
+        </span>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="text"
+            id="email"
+            formControlName="email"
+            class="form-control"
+          />
+        </div>
+        <span
+          class="help-block"
+          *ngIf="
+            !projectForm.get('email').valid && projectForm.get('email').touched
+          "
+        >
+          Please enter a valid email!
+        </span>
+        <div class="form-group">
+          <label for="projectStatus">Project Status</label><br />
+          <select
+            name="projectStatus"
+            id="projectStatus"
+            formControlName="projectStatus"
+          >
+            <option value="stable">Stable</option>
+            <option value="critical">Critical</option>
+            <option value="finished">Finished</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" type="submit">
+          <!-- [disabled]="!projectForm.valid" -->
           Submit
         </button>
       </form>
